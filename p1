@@ -1,0 +1,21 @@
+# IBAN Formatter
+xs = 'BG80BNBG96611020345678'
+xss = 'BG80 BNBG 9661 1020 3456 78'
+
+
+def iban_formatter(iban):
+    result = []
+    counter = 0
+    if iban.find(' ') > 0:
+        iban = iban.replace(' ','')
+    for i in iban:
+        if counter % 4 == 0 and counter != 0:
+            result.append(' ')
+        result.append(i)
+        counter += 1
+    formatted_iban = ''.join(result)
+    return formatted_iban
+
+
+print(iban_formatter(xs))
+print(iban_formatter(xss))
