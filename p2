@@ -1,0 +1,19 @@
+# SUM OF DIGITS
+
+def sum_of_digits(n):
+    running_sum = 0
+    lst = []
+
+    if n < 0:
+        n = abs(n)
+
+    for i in str(n):
+        lst.append(i)
+    for i in lst:
+        running_sum += int(i)
+
+    return running_sum
+
+
+print(sum_of_digits(42))
+print(sum_of_digits(-42))
