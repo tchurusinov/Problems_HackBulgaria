@@ -1,0 +1,16 @@
+# SUM MATRIX
+
+m = [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]]
+
+
+def sum_matrix(m):
+    running_sum = 0
+
+    for i in m:
+        for j in i:
+            running_sum += j
+
+    return running_sum
+
+
+print(sum_matrix(m))
