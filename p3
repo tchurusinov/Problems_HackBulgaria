@@ -1,0 +1,19 @@
+# FACTORIAL DIGITS
+from math import factorial
+
+
+def fact_digits(n):
+    result = 0
+    lst = []
+
+    for i in str(n):
+        lst.append(i)
+
+    for i in lst:
+        factorial_product = factorial(int(i))
+        result += factorial_product
+
+    return result
+
+
+print(fact_digits(42))
