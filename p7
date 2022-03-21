@@ -1,0 +1,35 @@
+# INCREASING AND DECREASING
+
+from enum import Enum
+
+
+class Monotonicity(Enum):
+    INCREASING = 1
+    DECREASING = 2
+    NONE = 3
+
+
+def increasing_or_decreasing(ns):
+    increase = True
+    decrease = True
+
+    for i, j in enumerate(ns[:-1]):
+        if j < ns[i + 1]:
+            decrease = False
+        elif j > ns[i + 1]:
+            increase = False
+        else:
+            increase = False
+            decrease = False
+
+    if increase:
+        return Monotonicity.INCREASING
+    elif decrease:
+        return Monotonicity.DECREASING
+    else:
+        return Monotonicity.NONE
+
+
+print(increasing_or_decreasing([5, 4, 3]))
+print(increasing_or_decreasing([5, 6, -10]))
+print(increasing_or_decreasing([5, 6, 7]))
