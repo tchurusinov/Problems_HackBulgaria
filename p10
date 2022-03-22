@@ -1,0 +1,21 @@
+# PALINDROMES COUNT
+
+def palindromes_count(n):
+    counter = 0
+    str_lst = []
+
+    for i in range(10, n + 1):
+        str_lst.append(str(i))
+
+    for si in str_lst:
+        if si == si[::-1]:
+            counter += 1
+        else:
+            continue
+
+    return counter
+
+
+print(palindromes_count(101))
+print(palindromes_count(92009))
+print(palindromes_count(99999))
