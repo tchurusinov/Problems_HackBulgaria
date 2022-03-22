@@ -39,3 +39,10 @@ def group(items):
         index = lookup_index
 
     return result
+    
+    
+    
+    
+    
+    #We are going to implement a very helpful function, called group.
+    #group takes a list of items and returns a list of groups, where each group is formed by all equal consecutive elements in the list.
