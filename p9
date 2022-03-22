@@ -1,0 +1,36 @@
+# BALANCED NUMBERS
+
+def is_number_balanced(number):
+    digits = []
+    char_digits = list(str(number))
+
+    left_sum = 0
+    right_sum = 0
+
+    if number in range(0, 10):
+        return True
+
+    for digi in char_digits:
+        digits.append(int(digi))
+
+    length = len(digits)
+    middle = length // 2
+    is_odd_length = length % 2 == 1
+
+    for index, digit in enumerate(digits):
+        if index < middle:
+            left_sum += digit
+        else:
+            if index == middle and is_odd_length:
+                continue
+            right_sum += digit
+
+    return left_sum == right_sum
+
+
+print(is_number_balanced(9))
+print(is_number_balanced(4518))
+print(is_number_balanced(28471))
+print(is_number_balanced(1238033))
+
+
