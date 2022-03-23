@@ -1,0 +1,45 @@
+# INTEGER PRIME FACTORIZATION
+
+def is_prime(n):
+    if n < 2:
+        return False
+
+    for d in range(2, n):
+        if n % 2 == 0:
+            return False
+
+    return True
+
+
+def next_prime(n):
+    n = n + 1
+
+    while not is_prime(n):
+        n = n + 1
+
+    return n
+
+
+def prime_factorization(n):
+    result = []
+    p = 2
+    a = 0
+
+    while n != 1:
+        while n % p == 0:
+            a = a + 1
+            n = n // p
+
+        if a > 0:
+            result.append((p, a))
+
+        a = 0
+        p = next_prime(p)
+
+    return result
+
+
+print(prime_factorization(10))
+print(prime_factorization(42))
+print(prime_factorization(14))
+print(prime_factorization(356))
