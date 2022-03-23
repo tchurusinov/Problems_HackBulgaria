@@ -1,0 +1,13 @@
+# ANAGRAMS
+
+def anagrams(word1, word2):
+    word1 = word1.lower().replace(" ", '')
+    word2 = word2.lower().replace(" ", '')
+
+    return sorted(word1) == sorted(word2)
+
+
+print(anagrams("listen", "silent"))       
+print(anagrams("New York Times", "monkeys write")) 
+print(anagrams("python", "ruby"))               
+print(anagrams("LISTEN", "silent"))            
