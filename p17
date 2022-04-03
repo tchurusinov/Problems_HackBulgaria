@@ -1,0 +1,107 @@
+# WORD COUNTER
+
+import enum
+
+
+class Directions(enum.Enum):
+    HORIZONTAL_LEFT = 'HORIZONTAL_LEFT'
+    HORIZONTAL_RIGHT = 'HORIZONTAL_RIGHT'
+
+    VERTICAL_UP = 'VERTICAL_UP'
+    VERTICAL_DOWN = 'VERTICAL_DOWN'
+
+    DIAGONAL_UP_RIGHT = 'DIAGONAL_UP_RIGHT'
+    DIAGONAL_UP_LEFT = 'DIAGONAL_UP_LEFT'
+    DIAGONAL_DOWN_RIGHT = 'DIAGONAL_DOWN_RIGHT'
+    DIAGONAL_DOWN_LEFT = 'DIAGONAL_DOWN_LEFT'
+
+
+def outside_of_bounds(point, matrix):
+    x, y = point
+
+    MIN_X = 0
+    MAX_X = len(matrix) - 1
+    MIN_Y = 0
+    MAX_Y = len(matrix[0]) - 1
+
+    return x < MIN_X or x > MAX_X or y < MIN_Y or y > MAX_Y
+
+
+def take_word(n, point, direction, matrix):
+    dx = 0
+    dy = 0
+
+    if direction == Directions.HORIZONTAL_RIGHT:
+        dx = 0
+        dy = 1
+
+    if direction == Directions.HORIZONTAL_LEFT:
+        dx = 0
+        dy = -1
+
+    if direction == Directions.VERTICAL_DOWN:
+        dx = 1
+        dy = 0
+
+    if direction == Directions.VERTICAL_UP:
+        dx = -1
+        dy = 0
+
+    if direction == Directions.DIAGONAL_UP_RIGHT:
+        dx = -1
+        dy = 1
+
+    if direction == Directions.DIAGONAL_UP_LEFT:
+        dx = -1
+        dy = -1
+
+    if direction == Directions.DIAGONAL_DOWN_RIGHT:
+        dx = 1
+        dy = 1
+
+    if direction == Directions.DIAGONAL_DOWN_LEFT:
+        dx = 1
+        dy = -1
+
+    start_x, start_y = point
+    n_counter = 0
+    chars = []
+
+    while n_counter != n:
+        if outside_of_bounds((start_x, start_y), matrix):
+            return None
+
+        chars.append(matrix[start_x][start_y])
+
+        start_x = dx
+        start_y = dy
+
+        n_counter += 1
+
+    return ''.join(chars)
+
+
+def word_counter(matrix, word):
+    counter = 0
+
+    for row_index in range(len(matrix)):
+        for column_index in range(len(matrix[0])):
+            for direction in Directions:
+                found_word = take_word(len(word), (row_index, column_index), direction, matrix)
+
+                if found_word == word:
+                    counter += 1
+
+    if word == word[::-1]:
+        counter = counter // 2
+
+    return counter
+
+
+print(word_counter([
+    ["i", "v", "a", "n"],
+    ["e", "v", "n", "h"],
+    ["i", "n", "a", "v"],
+    ["m", "v", "v", "n"],
+    ["q", "r", "i", "t"]
+], 'ivan'))
