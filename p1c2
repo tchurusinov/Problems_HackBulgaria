@@ -1,0 +1,19 @@
+# REDUCE FILE PATH
+
+from collections import deque
+
+
+def reduce_file_path(path):
+    result = deque()
+
+    for i in path.split("/"):
+        if i == ".." and len(result) > 0:
+            result.pop()
+
+        if i not in (".", "..", ""):
+            result.append(i)
+
+    return '/' + '/'.join(result)
+
+
+print(reduce_file_path("/home//user/courses/./Programming101-Python/week01/../"))
