@@ -1,0 +1,93 @@
+# INTERVAL EXTENDED
+
+class Interval:
+    def __init__(self, start, end, start_opened=False, end_opened=False):
+        self.start = start
+        self.end = end
+        self.start_opened = start_opened
+        self.end_opened = end_opened
+
+    def is_inside(self, value):
+        if self.start_opened == False and self.end_opened == False:
+            return self.start <= value <= self.end
+
+        if self.start_opened and self.end_opened == False:
+            if value == self.start:
+                return False
+            else:
+                return self.start <= value <= self.end
+
+        if self.start_opened == False and self.end_opened:
+            if value == self.end:
+                return False
+            else:
+                return self.start <= value <= self.end
+
+        if self.start_opened and self.end_opened:
+            if value == self.start or value == self.end:
+                return False
+            else:
+                return self.start <= value <= self.end
+
+    def stringify(self):
+        if self.start_opened:
+            start_symbol = "("
+        else:
+            start_symbol = "["
+
+        if self.end_opened:
+            end_symbol = ")"
+        else:
+            end_symbol = "]"
+
+        return f"{start_symbol}{self.start}, {self.end}{end_symbol}"
+
+
+interval = Interval(1, 10)
+
+print(interval.stringify())
+print(interval.is_inside(1))
+print(interval.is_inside(5))
+print(interval.is_inside(10))
+
+
+
+
+#AND NOW THE UNITTESTS F0R THIS CLASS
+
+
+# UNITTESTS FOR THE INTERVAL CLASS
+
+from unittest import TestCase
+
+from unittestingC import Interval
+
+
+class IntervalTests(TestCase):
+
+    def test_stringify_produces_results(self):
+        interval = Interval(1, 10)
+        expected = "[1, 10]"
+
+        self.assertEqual(expected, interval.stringify())
+
+    def test_is_inside_produces_results(self):
+        interval = Interval(1, 10, False, False)
+
+        self.assertTrue(interval.is_inside(1))
+        self.assertTrue(interval.is_inside(5))
+        self.assertTrue(interval.is_inside(10))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
